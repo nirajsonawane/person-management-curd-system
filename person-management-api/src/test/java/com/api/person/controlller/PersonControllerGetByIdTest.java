@@ -82,7 +82,7 @@ class PersonControllerGetByIdTest {
                 .favouriteColour(Colour.RED)
                 .firstName("Niraj")
                 .lastName("Sonawane")
-                .hobby(Arrays.asList(new Hobby("Cricket")))
+                .hobby(Arrays.asList(Hobby.builder().hobbyStringValue("Cricket").build()))
                 .build();
     }
 
@@ -101,7 +101,7 @@ class PersonControllerGetByIdTest {
     @MethodSource("verifyPersonStringAttributes")
     void verifyPersonStringAttributes(String jsonAttribute, String value) throws Exception {
         Mockito
-                .when(personService.getPersonById(Mockito.anyInt()))
+                .when(personService.getPersonById(Mockito.anyLong()))
                 .thenReturn(getMockPerson());
 
         Mockito
@@ -120,7 +120,7 @@ class PersonControllerGetByIdTest {
     @MethodSource("verifyPersonIntAttributes")
     void verifyPersonIntAttributes(String jsonAttribute, int value) throws Exception {
         Mockito
-                .when(personService.getPersonById(Mockito.anyInt()))
+                .when(personService.getPersonById(Mockito.anyLong()))
                 .thenReturn(getMockPerson());
 
         Mockito
@@ -141,7 +141,7 @@ class PersonControllerGetByIdTest {
     void verifyPersonListAttributes(String jsonAttribute, List<String> value) throws Exception {
 
         Mockito
-                .when(personService.getPersonById(Mockito.anyInt()))
+                .when(personService.getPersonById(Mockito.anyLong()))
                 .thenReturn(getMockPerson());
 
         Mockito
@@ -162,7 +162,7 @@ class PersonControllerGetByIdTest {
     void shouldReturnInternalServerError() throws Exception {
 
         Mockito
-                .when(personService.getPersonById(Mockito.anyInt()))
+                .when(personService.getPersonById(Mockito.anyLong()))
                 .thenThrow(new RuntimeException("Mock Exception"));
         mvc
                 .perform(MockMvcRequestBuilders
@@ -179,7 +179,7 @@ class PersonControllerGetByIdTest {
     void shouldReturnResourceNotFound() throws Exception {
 
         Mockito
-                .when(personService.getPersonById(Mockito.anyInt()))
+                .when(personService.getPersonById(Mockito.anyLong()))
                 .thenThrow(new ResourceNotFoundException("Not Found"));
         mvc
                 .perform(MockMvcRequestBuilders

@@ -19,7 +19,7 @@ public class UpdatePersonRequest implements Serializable{
 
 
     @NotNull(message = "Person Id is mandatory")
-    @JsonProperty("person_id")
+    @JsonProperty("id")
     private Long personId;
 
     @NotEmpty(message = "First Name is mandatory")

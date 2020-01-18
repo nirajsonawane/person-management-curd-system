@@ -32,7 +32,7 @@ public interface PersonMapper {
         if(hobbyList==null)
             return new ArrayList<>();
 
-        return hobbyList.stream().map(Hobby::new).collect(Collectors.toList());
+        return hobbyList.stream().map(it-> Hobby.builder().hobbyStringValue(it).build()).collect(Collectors.toList());
     }
 
     default  List<String> convertFromHobby(List<Hobby> list){

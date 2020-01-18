@@ -43,7 +43,7 @@ class PersonControllerDeleteMethodTest {
         Mockito
                 .doNothing()
                 .when(personService)
-                .delete(Mockito.anyInt());
+                .delete(Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
                         .delete("/person/1")
@@ -59,7 +59,7 @@ class PersonControllerDeleteMethodTest {
         Mockito
                 .doThrow(ResourceNotFoundException.class)
                 .when(personService)
-                .delete(Mockito.anyInt());
+                .delete(Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
                         .delete("/person/1")
@@ -75,7 +75,7 @@ class PersonControllerDeleteMethodTest {
         Mockito
                 .doThrow(RuntimeException.class)
                 .when(personService)
-                .delete(Mockito.anyInt());
+                .delete(Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
                         .delete("/person/1")

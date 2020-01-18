@@ -36,7 +36,7 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public GetPersonResponse getPerson(@PathVariable Integer id) {
+    public GetPersonResponse getPerson(@PathVariable Long id) {
         log.info("Getting Person Data For id {}", id);
         return personMapper.fromPerson(personService.getPersonById(id));
     }
@@ -59,7 +59,7 @@ public class PersonController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletePerson(@PathVariable Integer id) {
+    public ResponseEntity deletePerson(@PathVariable Long id) {
         log.info("Deleting Person Data For id {}", id);
         personService.delete(id);
         return ResponseEntity

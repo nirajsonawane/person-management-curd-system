@@ -1,15 +1,12 @@
 package com.api.person.service;
 
-import com.api.person.enity.Hobby;
+import com.api.person.repository.PersonRepository;
 import com.api.person.enity.Person;
-import com.api.person.model.Colour;
+import com.api.person.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -17,41 +14,32 @@ import java.util.List;
 @Slf4j
 public class PersonService {
 
-    private List<Person> personList = new ArrayList<>();
-
-
-    @PostConstruct
-    public void setup(){
-
-        Person person = Person.builder()
-
-                .age(32)
-                .favouriteColour(Colour.RED)
-                .firstName("Niraj")
-                .lastName("Sonawane")
-                .hobby(Arrays.asList((new Hobby("Cricket"))))
-                .build();
-        personList.add(person);
-    }
+    private final PersonRepository personRepository;
 
     public List<Person> getAllPersons() {
-        return personList;
+        return personRepository.findAll();
     }
 
-    public Integer save(Person person) {
-        log.info("Saving Person to Database {}",person);
-        return  2;
-    }
-    public Person getPersonById(Integer id){
-
-        return personList.get(0);
+    public Long save(Person person) {
+        log.info("Saving Person to Database {}", person);
+        Person personFromDatabase = personRepository.save(person);
+        return personFromDatabase.getPersonId();
     }
 
-    public void delete(Integer id) {
+    public Person getPersonById(Long id) {
+        log.info("Finding Person for id {}",id);
+        return personRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Person Not Found for id " + id));
+    }
 
+    public void delete(Long id) {
+        log.info("Deleting Person for id {}",id);
+        personRepository.deleteById(id);
     }
 
     public void update(Person person) {
-
+        log.info("Updating Person for id {}",person.getPersonId());
+        personRepository.save(person);
     }
 }

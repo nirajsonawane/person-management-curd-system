@@ -63,7 +63,7 @@ class PersonControllerGetAllTest {
                 .favouriteColour(Colour.RED)
                 .firstName("Niraj")
                 .lastName("Sonawane")
-                .hobby(Arrays.asList(new Hobby("Cricket")))
+                .hobby(Arrays.asList(Hobby.builder().hobbyStringValue("Cricket").build()))
                 .build();
     }
 
