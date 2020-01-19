@@ -1,7 +1,7 @@
 package com.api.person.controlller;
 
 import com.api.person.controller.PersonController;
-import com.api.person.exception.ResourceNotFoundException;
+import com.api.common.exception.ResourceNotFoundException;
 import com.api.person.mapper.PersonMapper;
 import com.api.person.service.PersonService;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
@@ -45,7 +45,7 @@ class PersonControllerDeleteMethodTest {
         Mockito
                 .doNothing()
                 .when(personService)
-                .delete(Mockito.anyLong());
+                .deletePersonById(Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
                         .delete("/person/1")
@@ -61,7 +61,7 @@ class PersonControllerDeleteMethodTest {
         Mockito
                 .doThrow(ResourceNotFoundException.class)
                 .when(personService)
-                .delete(Mockito.anyLong());
+                .deletePersonById(Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
                         .delete("/person/1")
@@ -77,7 +77,7 @@ class PersonControllerDeleteMethodTest {
         Mockito
                 .doThrow(RuntimeException.class)
                 .when(personService)
-                .delete(Mockito.anyLong());
+                .deletePersonById(Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
                         .delete("/person/1")

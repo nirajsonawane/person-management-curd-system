@@ -59,7 +59,7 @@ class PersonControllerDeleteIntegrationTest {
 
 
     @Test
-    @DisplayName("Should Accept request with valid jwt Token and delete user")
+    @DisplayName("Should Accept request with valid jwt Token and deletePersonById user")
     void shouldDeletePersonInDatabase() throws Exception {
         Person save = personRepository.save(mockPerson);
         personRepository.flush();

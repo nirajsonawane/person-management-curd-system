@@ -1,4 +1,4 @@
-package com.api.person.exception;
+package com.api.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

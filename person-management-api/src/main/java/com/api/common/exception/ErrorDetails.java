@@ -1,4 +1,4 @@
-package com.api.person.exception;
+package com.api.common.exception;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

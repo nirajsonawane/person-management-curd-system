@@ -1,7 +1,7 @@
 package com.api.person.service;
 
 import com.api.person.enity.Person;
-import com.api.person.exception.ResourceNotFoundException;
+import com.api.common.exception.ResourceNotFoundException;
 import com.api.person.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ public class PersonService {
                 .orElseThrow(() -> new ResourceNotFoundException("Person Not Found for id " + id));
     }
 
-    public void delete(Long id) {
+    public void deletePersonById(Long id) {
         log.info("Deleting Person for id {}",id);
         personRepository.deleteById(id);
     }
