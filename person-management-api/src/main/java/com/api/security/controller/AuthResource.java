@@ -1,8 +1,8 @@
 package com.api.security.controller;
 
-import com.api.security.model.UserPrincipal;
 import com.api.security.model.AuthenticateRequest;
 import com.api.security.model.JwtAuthenticationResponse;
+import com.api.security.model.UserPrincipal;
 import com.api.security.service.JWTTokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

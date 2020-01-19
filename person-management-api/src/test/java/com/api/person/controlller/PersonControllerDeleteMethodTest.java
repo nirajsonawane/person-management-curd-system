@@ -1,7 +1,7 @@
 package com.api.person.controlller;
 
-import com.api.person.controller.PersonController;
 import com.api.common.exception.ResourceNotFoundException;
+import com.api.person.controller.PersonController;
 import com.api.person.mapper.PersonMapper;
 import com.api.person.service.PersonService;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;

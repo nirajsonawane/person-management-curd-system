@@ -1,7 +1,7 @@
 package com.api.person.service;
 
-import com.api.person.enity.Person;
 import com.api.common.exception.ResourceNotFoundException;
+import com.api.person.enity.Person;
 import com.api.person.repository.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
