@@ -1,7 +1,9 @@
 package com.api.security.service;
 
+import com.api.security.config.JwtConfigPropeties;
 import com.api.security.model.UserPrincipal;
 import io.jsonwebtoken.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,13 +16,10 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
+@RequiredArgsConstructor
 public class JWTTokenProvider {
 
-    @Value("${jwt.secret}")
-    private String jwtSecret;
-
-    @Value("${jwt.expirationInMs}")
-    private int jwtExpirationInMs;
+   private final JwtConfigPropeties jwtConfigPropeties;
 
     public String generateToken(UserPrincipal userPrincipal){
 
@@ -32,20 +31,20 @@ public class JWTTokenProvider {
 
         return Jwts
                 .builder()
-                .setIssuer("Demo App")
+                .setIssuer("API APP")
                 .setSubject(userPrincipal.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(new Date().getTime() + jwtExpirationInMs * 10000))
+                .setExpiration(new Date(new Date().getTime() + jwtConfigPropeties.getExpirationInMs() * 10000))
                 .claim("Roles", roles)
-                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .signWith(SignatureAlgorithm.HS512, jwtConfigPropeties.getSecret())
                 .compact();
     }
 
     public boolean validateToken(String jwt) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(jwt);
+            Jwts.parser().setSigningKey(jwtConfigPropeties.getSecret()).parseClaimsJws(jwt);
             return true;
-        } catch (SignatureException ex) {
+        } catch (SignatureException  ex) {
             log.error("Invalid JWT signature");
         } catch (MalformedJwtException ex) {
             log.error("Invalid JWT token");
@@ -61,7 +60,7 @@ public class JWTTokenProvider {
 
     }
     public String getUserNameFromToken(String token){
-        return  Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+        return  Jwts.parser().setSigningKey(jwtConfigPropeties.getSecret()).parseClaimsJws(token).getBody().getSubject();
     }
 
 

@@ -16,16 +16,17 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
-
-public class SwaggerConfig {                                    
+public class SwaggerConfig {
     @Bean
-    public Docket api() { 
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-          .select()                                  
-          .apis(RequestHandlerSelectors.any())
-          .paths(PathSelectors.any())
-          .build();                                           
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apinfo());
     }
+
     private ApiInfo apinfo() {
         return new ApiInfoBuilder()
                 .title("Person Management API")
@@ -34,7 +35,7 @@ public class SwaggerConfig {
                 .version("1.0.0")
                 .license("Some License Info")
                 .licenseUrl("Some License URL")
-                .contact(new springfox.documentation.service.Contact("Niraj Sonawane", "https://nirajsonawane.github.io/","Niraj.Sonawane@gmail.com"))
+                .contact(new springfox.documentation.service.Contact("Niraj Sonawane", "https://nirajsonawane.github.io/", "Niraj.Sonawane@gmail.com"))
                 .build();
     }
 } 

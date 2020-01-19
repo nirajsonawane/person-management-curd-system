@@ -4,6 +4,7 @@ import com.api.security.filter.JwtAuthenticationFilter;
 import com.api.security.service.InvalidLoginAttemptHandler;
 import com.api.security.service.UserAuthDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -18,7 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@Profile(value = {"development", "production","integration"})
+@ConditionalOnProperty(name = "enabled.jwt", havingValue = "true")
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired

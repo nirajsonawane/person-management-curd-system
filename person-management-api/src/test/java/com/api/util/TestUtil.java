@@ -45,8 +45,24 @@ public class TestUtil {
         JwtAuthenticationResponse objectFromString = TestUtil.getObjectFromString(content);
         return  objectFromString.getAccessToken();
     }
+    public static String getTokenForNonAdminUser(MockMvc mockMvc) throws Exception {
+        MvcResult test = mockMvc
+                .perform(MockMvcRequestBuilders
+                        .post("/authenticate")
+                        .content(TestUtil.asJsonString(new AuthenticateRequest("text@test.com", "test")))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andReturn();
+
+        String content = test.getResponse().getContentAsString();
+        JwtAuthenticationResponse objectFromString = TestUtil.getObjectFromString(content);
+        return  objectFromString.getAccessToken();
+    }
     public static void setupJwtUser(UserRepository userRepository) {
-        User niraj = new User("niraj.sonawane@gmail.com", "$2a$10$yRxRYK/s8vZCp.bgmZsD/uXmHjekuPU/duM0iPZw04ddt1ID9H7kK", "Admin");
+        User niraj = new User("niraj.sonawane@gmail.com", "$2a$10$yRxRYK/s8vZCp.bgmZsD/uXmHjekuPU/duM0iPZw04ddt1ID9H7kK", "ROLE_ADMIN");
+        User nonAdmin = new User("text@test.com", "$2a$10$yRxRYK/s8vZCp.bgmZsD/uXmHjekuPU/duM0iPZw04ddt1ID9H7kK", "ROLE_USER");
+        userRepository.save(nonAdmin);
         userRepository.save(niraj);
         userRepository.flush();
 
