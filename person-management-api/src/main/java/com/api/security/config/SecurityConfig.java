@@ -54,7 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .exceptionHandling().authenticationEntryPoint(invalidLoginAttemptHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/authenticate/**")
+                .antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui", "/swagger-resources", "/swagger-resources/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
+                .antMatchers("/authenticate/**","/actuator/**")
                 .permitAll()
                 .anyRequest().authenticated();
          http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
