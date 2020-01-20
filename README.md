@@ -29,6 +29,9 @@ OR
 mvn spring-boot:run
 ```
 The server will start at http://localhost:8080.
+
 Health endpoint : http://localhost:8080/actuator/health
+
 Info ednpoint : http://localhost:8080/actuator/info
+
 Swagger http://localhost:8080/swagger-ui.html#
