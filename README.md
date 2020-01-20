@@ -17,4 +17,6 @@ Actuator health endpoint can be used to track status.Build and git commit inform
 cd person-management-api
 mvn package
 java -jar target/person-management-api-0.0.1-SNAPSHOT.jar
+OR
+mvn spring-boot:run
 ```
