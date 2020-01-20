@@ -4,7 +4,6 @@ import com.api.person.enity.Hobby;
 import com.api.person.enity.Person;
 import com.api.person.model.CreatePersonRequest;
 import com.api.person.model.GetPersonResponse;
-import com.api.person.model.UpdatePersonRequest;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,11 +20,7 @@ public interface PersonMapper {
     @Mapping(target = "hobby", source = "hobby", qualifiedByName = "convertToHobby")
     Person toPerson(CreatePersonRequest personRequest);
 
-    @Mapping(target = "personId", source = "personId")
-    @Mapping(target = "hobby", source = "hobby", qualifiedByName = "convertToHobby")
-    Person toPerson(UpdatePersonRequest personRequest);
-
-    @Mapping(target = "hobby", source = "hobby", qualifiedByName = "convertFromHobby")
+   @Mapping(target = "hobby", source = "hobby", qualifiedByName = "convertFromHobby")
     GetPersonResponse fromPerson(Person person);
 
     default List<Hobby> convertToHobby(List<String> hobbyList) {
@@ -36,7 +31,7 @@ public interface PersonMapper {
                 .stream()
                 .map(it -> Hobby
                         .builder()
-                        .hobbyStringValue(it)
+                        .hobbyName(it)
                         .build())
                 .collect(Collectors.toList());
     }
@@ -47,7 +42,7 @@ public interface PersonMapper {
         }
         return list
                 .stream()
-                .map(Hobby::getHobbyStringValue)
+                .map(Hobby::getHobbyName)
                 .collect(Collectors.toList());
     }
 }

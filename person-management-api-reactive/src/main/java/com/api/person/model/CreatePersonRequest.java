@@ -32,6 +32,6 @@ public class CreatePersonRequest  implements Serializable{
     @JsonProperty("favourite_colour")
     private Colour favouriteColour;
 
-    @NotEmpty(message = "At Lest On hobbyStringValue is needed")
+    @NotEmpty(message = "At Lest On hobbyName is needed")
     private List<String> hobby;
 }

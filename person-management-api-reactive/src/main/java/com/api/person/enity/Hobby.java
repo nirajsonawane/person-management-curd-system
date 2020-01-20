@@ -9,13 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-//@Entity
 public class Hobby {
 
-  /*  @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
-    private Long hobbyId;
-    private String hobbyStringValue;
+    private String hobbyName;
 
 
 }

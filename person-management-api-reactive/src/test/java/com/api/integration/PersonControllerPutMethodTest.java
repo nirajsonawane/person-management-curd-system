@@ -2,9 +2,11 @@ package com.api.integration;
 
 import com.api.person.enity.Person;
 import com.api.person.mapper.PersonMapper;
+import com.api.person.model.CreatePersonRequest;
 import com.api.person.model.GetPersonResponse;
 import com.api.person.repository.PersonRepository;
 import com.api.util.TestUtil;
+import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,16 +18,21 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Mono;
 
 import java.net.URI;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
 @Slf4j
 @ExtendWith(RandomBeansExtension.class)
 @ActiveProfiles(value = "integration")
-class PersonControllerGetMethodTest {
+class PersonControllerPutMethodTest {
 
+    @Random
+    private CreatePersonRequest updatePersonRequest;
 
     @Autowired
     private WebTestClient webTestClient;
@@ -36,6 +43,7 @@ class PersonControllerGetMethodTest {
     @Autowired
     private PersonMapper personMapper;
 
+
     @BeforeEach
     public void setup() {
         personRepository
@@ -44,45 +52,48 @@ class PersonControllerGetMethodTest {
     }
 
     @Test
-    @DisplayName("Should Return All Person")
-    void shouldReturnAllPerson() throws Exception {
-        GetPersonResponse person1 = personRepository
+    @DisplayName("Should update Person For Valid Request")
+    void shouldReturnUpdatePerson() throws Exception {
+
+        GetPersonResponse block = personRepository
                 .save(TestUtil.getPerson())
                 .map(personMapper::fromPerson)
                 .block();
-        GetPersonResponse person2 = personRepository
-                .save(TestUtil.getPerson())
-                .map(personMapper::fromPerson)
-                .block();
-
-
+        CreatePersonRequest updatedLastName = CreatePersonRequest
+                .builder()
+                .age(block.getAge())
+                .favouriteColour(block.getFavouriteColour())
+                .firstName(block.getFirstName())
+                .lastName("UpdatedLastName")
+                .hobby(block.getHobby())
+                .build();
         webTestClient
-                .get()
-                .uri(URI.create("/person/"))
+                .put()
+                .uri(URI.create("/person/"+block.getPersonId()))
+                .body(Mono.just(updatedLastName), CreatePersonRequest.class)
                 .exchange()
                 .expectStatus()
-                .isOk()
-                .expectBodyList(GetPersonResponse.class)
-                .contains(person1)
-                .contains(person2);
+                .isNoContent();
+
+        Person fromDb = personRepository
+                .findById(block.getPersonId())
+                .block();
+
+        assertEquals(updatedLastName.getLastName(), fromDb.getLastName());
+
 
     }
 
     @Test
-    @DisplayName("Should Return Empty Respons if No Data")
-    void shouldReturnEmptyPerson() throws Exception {
-
-
+    @DisplayName("Should get 404 For Wrong Person  id")
+    void shouldReturn404FormWrongPersonId() throws Exception {
         webTestClient
-                .get()
-                .uri(URI.create("/person/"))
+                .put()
+                .uri(URI.create("/person/"+"SomeWrongId"))
+                .body(Mono.just(updatePersonRequest), CreatePersonRequest.class)
                 .exchange()
                 .expectStatus()
-                .isOk()
-                .expectBodyList(Person.class)
-                .hasSize(0)
-        ;
-
+                .isNotFound();
     }
 
 

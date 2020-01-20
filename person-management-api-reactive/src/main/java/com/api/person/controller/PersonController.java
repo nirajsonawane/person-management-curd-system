@@ -1,8 +1,8 @@
 package com.api.person.controller;
 
-import com.api.person.enity.Person;
 import com.api.person.mapper.PersonMapper;
 import com.api.person.model.CreatePersonRequest;
+import com.api.person.model.GetPersonResponse;
 import com.api.person.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,38 +25,33 @@ public class PersonController {
 
 
     @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<Person> getAllPerson() {
+    public Flux<GetPersonResponse> getAllPerson() {
         log.info("Getting All Person Data");
         return personService
                 .getAllPersons();
     }
 
-
-    @GetMapping("/{id}")
-    public Mono<ResponseEntity<Person>> getPerson(@PathVariable String id) {
+    @GetMapping(value = "/{id}")
+    public Mono<ResponseEntity<GetPersonResponse>> getPerson(@PathVariable String id) {
         log.info("Getting Person Data For id {}", id);
         return personService.getPersonById(id);
     }
 
-    @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Mono<Person> savePerson(@Validated @RequestBody CreatePersonRequest person) {
+    public Mono<GetPersonResponse> savePerson(@Validated @RequestBody CreatePersonRequest person) {
         log.info("Creating Person Resource {}", person);
-        Mono<Person> save = personService.save(personMapper.toPerson(person));
-        return save;
+        return personService.save(personMapper.toPerson(person));
 
     }
-    /*@PutMapping
-    public ResponseEntity updatePerson(@Validated @RequestBody UpdatePersonRequest person) {
+    @PutMapping(value = "/{id}")
+    public Mono<ResponseEntity<GetPersonResponse>> updatePerson(@Validated @RequestBody CreatePersonRequest person,@PathVariable String id) {
         log.info("Creating Person Resource {}", person);
-        personService.update(personMapper.toPerson(person));
-        return ResponseEntity
-                .noContent()
-                .build();
-    }
-*/
-    @DeleteMapping("/{id}")
+        return personService.update(id,personMapper.toPerson(person));
 
+    }
+
+    @DeleteMapping(value = "/{id}")
     public Mono<ResponseEntity<Void>> deletePerson(@PathVariable String id) {
         log.info("Deleting Person Data For id {}", id);
         return personService.deletePersonById(id);

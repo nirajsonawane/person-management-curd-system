@@ -15,7 +15,7 @@ import java.util.List;
 public class GetPersonResponse {
 
     @JsonProperty("id")
-    private Long personId;
+    private String personId;
 
     @JsonProperty("first_name")
     private String firstName;
