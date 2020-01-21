@@ -1,8 +1,7 @@
 package com.api.integration;
 
 import com.api.person.enity.Person;
-import com.api.person.model.CreatePersonRequest;
-import com.api.person.model.UpdatePersonRequest;
+import com.api.person.model.PersonRequest;
 import com.api.person.repository.PersonRepository;
 import com.api.security.repository.UserRepository;
 import com.api.util.TestUtil;
@@ -33,10 +32,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class PersonControllerGetMethodIntegrationTest {
 
     @Random
-    private CreatePersonRequest person;
+    private PersonRequest person;
 
-    @Random
-    private UpdatePersonRequest updatePersonRequest;
+
     @Random
     private Person mockPerson;
 

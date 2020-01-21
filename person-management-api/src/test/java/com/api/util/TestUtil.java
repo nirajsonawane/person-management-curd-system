@@ -1,5 +1,7 @@
 package com.api.util;
 
+import com.api.person.model.Colour;
+import com.api.person.model.PersonRequest;
 import com.api.person.repository.PersonRepository;
 import com.api.security.entity.User;
 import com.api.security.model.AuthenticateRequest;
@@ -11,9 +13,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 public class TestUtil {
+
+    public static void main(String[] args) {
+        PersonRequest createPersonRequest = PersonRequest.builder().age(31)
+                                                         .favouriteColour(Colour.BLACK)
+                                                         .firstName("Niraj")
+                                                         .lastName("Sonawane")
+                                                         .hobby(Arrays.asList("Cricket")).build();
+        System.out.println(asJsonString(createPersonRequest));
+    }
     public static String asJsonString(final Object obj) {
         try {
             System.out.println(new ObjectMapper().writeValueAsString(obj));

@@ -1,7 +1,7 @@
 package com.api.person.mapper;
 
 import com.api.person.enity.Person;
-import com.api.person.model.CreatePersonRequest;
+import com.api.person.model.PersonRequest;
 import io.github.glytching.junit.extension.random.Random;
 import io.github.glytching.junit.extension.random.RandomBeansExtension;
 import org.junit.jupiter.api.DisplayName;
@@ -18,14 +18,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 @ExtendWith(RandomBeansExtension.class)
 @ActiveProfiles(value = "integration")
-class PersonMapperCreatePersonRequestTest {
+class PersonMapperPersonRequestTest {
 
     @Autowired
     private PersonMapper personMapper;
 
 
     @Random
-    private CreatePersonRequest createPersonRequest;
+    private PersonRequest createPersonRequest;
 
 
     @Test

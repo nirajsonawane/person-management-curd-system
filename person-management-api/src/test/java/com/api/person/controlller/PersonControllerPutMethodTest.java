@@ -3,7 +3,8 @@ package com.api.person.controlller;
 import com.api.common.exception.ResourceNotFoundException;
 import com.api.person.controller.PersonController;
 import com.api.person.mapper.PersonMapper;
-import com.api.person.model.UpdatePersonRequest;
+
+import com.api.person.model.PersonRequest;
 import com.api.person.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.glytching.junit.extension.random.Random;
@@ -37,7 +38,7 @@ class PersonControllerPutMethodTest {
 
 
     @Random
-    private static UpdatePersonRequest person;
+    private static PersonRequest person;
 
     @MockBean
     private PersonService personService;
@@ -55,7 +56,7 @@ class PersonControllerPutMethodTest {
         person.setAge(null);
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -69,7 +70,7 @@ class PersonControllerPutMethodTest {
         person.setHobby(null);
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -83,7 +84,7 @@ class PersonControllerPutMethodTest {
         person.setHobby(new ArrayList<String>());
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -97,7 +98,7 @@ class PersonControllerPutMethodTest {
         person.setFirstName(null);
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -111,7 +112,7 @@ class PersonControllerPutMethodTest {
         person.setFirstName("");
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -125,7 +126,7 @@ class PersonControllerPutMethodTest {
         person.setLastName(null);
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -139,7 +140,7 @@ class PersonControllerPutMethodTest {
         person.setLastName("");
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -153,7 +154,7 @@ class PersonControllerPutMethodTest {
         person.setFavouriteColour(null);
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -161,28 +162,14 @@ class PersonControllerPutMethodTest {
                 .andExpect(content().string(containsString("Favourite colour is mandatory")))
                 .andExpect(status().isBadRequest());
     }
-    @Test
-    @DisplayName("Should Return Bad Request Error For Null Person Id ")
-    void shouldReturnBadRequestErrorForNullPersonId() throws Exception {
-        person.setPersonId(null);
-        mvc
-                .perform(MockMvcRequestBuilders
-                        .put("/person")
-                        .content(asJsonString(person))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(content().string(containsString("Person Id is mandatory")))
-                .andExpect(status().isBadRequest());
-    }
 
     @Test
     @DisplayName("Should return isNoContent For Valid Request")
     void shouldReturnisNoContent() throws Exception {
-        Mockito.doNothing().when(personService).update(Mockito.any());
+        Mockito.doNothing().when(personService).update(Mockito.any(),Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -193,10 +180,10 @@ class PersonControllerPutMethodTest {
     @Test
     @DisplayName("Should return Internal Server Error  For Exception")
     void shouldReturnisInteralServerErrorContent() throws Exception {
-        Mockito.doThrow(RuntimeException.class).when(personService).update(Mockito.any());
+        Mockito.doThrow(RuntimeException.class).when(personService).update(Mockito.any(),Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/1234")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -206,10 +193,10 @@ class PersonControllerPutMethodTest {
     @Test
     @DisplayName("Should return 404 for invalid person is")
     void shouldReturnis404() throws Exception {
-        Mockito.doThrow(ResourceNotFoundException.class).when(personService).update(Mockito.any());
+        Mockito.doThrow(ResourceNotFoundException.class).when(personService).update(Mockito.any(),Mockito.anyLong());
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/123456")
                         .content(asJsonString(person))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))

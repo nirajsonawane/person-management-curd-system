@@ -15,12 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UpdatePersonRequest implements Serializable{
-
-
-    @NotNull(message = "Person Id is mandatory")
-    @JsonProperty("id")
-    private Long personId;
+public class PersonRequest implements Serializable{
 
     @NotEmpty(message = "First Name is mandatory")
     @JsonProperty("first_name")

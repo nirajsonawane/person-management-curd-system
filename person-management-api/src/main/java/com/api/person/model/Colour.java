@@ -11,7 +11,7 @@ public enum Colour {
     @JsonValue
     private final String colourValue;
 
-    private  Colour(String colourText){
+    Colour(String colourText){
         this.colourValue =colourText;
     }
 }

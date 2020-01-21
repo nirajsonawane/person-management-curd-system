@@ -2,7 +2,7 @@ package com.api.person.controlller;
 
 import com.api.person.controller.PersonController;
 import com.api.person.mapper.PersonMapper;
-import com.api.person.model.CreatePersonRequest;
+import com.api.person.model.PersonRequest;
 import com.api.person.service.PersonService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.glytching.junit.extension.random.Random;
@@ -36,7 +36,7 @@ class PersonControllerPostMethodTest {
 
 
     @Random
-    private static CreatePersonRequest person;
+    private static PersonRequest person;
 
     @MockBean
     private PersonService personService;

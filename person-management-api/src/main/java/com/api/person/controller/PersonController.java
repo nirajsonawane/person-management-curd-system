@@ -1,9 +1,9 @@
 package com.api.person.controller;
 
 import com.api.person.mapper.PersonMapper;
-import com.api.person.model.CreatePersonRequest;
+import com.api.person.model.PersonRequest;
 import com.api.person.model.GetPersonResponse;
-import com.api.person.model.UpdatePersonRequest;
+
 import com.api.person.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,17 +43,17 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity savePerson(@Validated @RequestBody CreatePersonRequest person) {
+    public ResponseEntity savePerson(@Validated @RequestBody PersonRequest person) {
         log.info("Creating Person Resource {}", person);
         personService.save(personMapper.toPerson(person));
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .build();
     }
-    @PutMapping
-    public ResponseEntity updatePerson(@Validated @RequestBody UpdatePersonRequest person) {
+    @PutMapping("/{id}")
+    public ResponseEntity updatePerson(@Validated @RequestBody PersonRequest person, @PathVariable Long id) {
         log.info("Creating Person Resource {}", person);
-        personService.update(personMapper.toPerson(person));
+        personService.update(personMapper.toPerson(person),id);
         return ResponseEntity
                 .noContent()
                 .build();

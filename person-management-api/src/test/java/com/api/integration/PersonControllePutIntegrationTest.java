@@ -1,7 +1,7 @@
 package com.api.integration;
 
 import com.api.person.enity.Person;
-import com.api.person.model.UpdatePersonRequest;
+import com.api.person.model.PersonRequest;
 import com.api.person.repository.PersonRepository;
 import com.api.security.repository.UserRepository;
 import com.api.util.TestUtil;
@@ -33,7 +33,7 @@ class PersonControllePutIntegrationTest {
 
 
     @Random
-    private UpdatePersonRequest updatePersonRequest;
+    private PersonRequest updatePersonRequest;
     @Random
     private Person mockPerson;
 
@@ -57,15 +57,11 @@ class PersonControllePutIntegrationTest {
     void shouldUpdatePersonInDatabase() throws Exception {
         Person save = personRepository.save(mockPerson);
         personRepository.flush();
-
-
         updatePersonRequest.setFirstName("Test user");
-        updatePersonRequest.setPersonId(save.getPersonId());
-
         String token = TestUtil.getToken(mvc);
         mvc
                 .perform(MockMvcRequestBuilders
-                        .put("/person")
+                        .put("/person/"+save.getPersonId())
                         .header("Authorization", "Bearer " + token)
                         .content(TestUtil.asJsonString(updatePersonRequest))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -77,6 +73,22 @@ class PersonControllePutIntegrationTest {
                 .findById(save.getPersonId())
                 .get();
         assertEquals(byId.getFirstName(), "Test user");
+
+    }
+    @Test
+    @DisplayName("Should Get 404 For invalid Person Id")
+    void shouldGet404ForInvalidPersonId() throws Exception {
+
+        String token = TestUtil.getToken(mvc);
+        mvc
+                .perform(MockMvcRequestBuilders
+                        .put("/person/"+9999)
+                        .header("Authorization", "Bearer " + token)
+                        .content(TestUtil.asJsonString(updatePersonRequest))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isNotFound());
 
     }
 

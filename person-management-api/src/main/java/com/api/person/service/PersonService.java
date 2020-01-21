@@ -38,8 +38,10 @@ public class PersonService {
         personRepository.deleteById(id);
     }
 
-    public void update(Person person) {
-        log.info("Updating Person for id {}",person.getPersonId());
+    public void update(Person person, Long id) {
+        log.info("Updating Person for id {}",id);
+        Person personFromDatabase = personRepository.getOne(id);
+        person.setPersonId(personFromDatabase.getPersonId());
         personRepository.save(person);
     }
 }
