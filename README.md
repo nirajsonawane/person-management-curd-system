@@ -43,5 +43,14 @@ user Name : niraj.sonawane@gmail.com , password : test ,role - ADMIN
 
 user Name : test@gmail.com , password : test ,role - USER
 
+Sample Curl to get Token 
+```
+curl -X POST \
+  http://localhost:8080/authenticate \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: 5e77f8cd-97bb-4faa-b1fa-3f099b4ad58c' \
+  -H 'cache-control: no-cache' \
+  -d '{"userName":"niraj.sonawane@gmail.com","password":"test"}'
+  ```
 
 
