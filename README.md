@@ -8,7 +8,8 @@ Repository has below projects
 **3 : UI** - WIP
 
 
- ### person-management-api [Backend] ###  [JAVA 8 + Spring Boot + JPA + H2 + Spring Security + JWT + junit 5]  
+ ### person-management-api [Backend] ###  
+ **[JAVA 8 + Spring Boot + JPA + H2 + Spring Security + JWT + mapstruct + junit 5]**  
 *Security* : All Rest endpoints are secured using JWT. Role based access control is implemented on rest endpoints, only Valid user with "ADMIN" Role can perform delete operation.
 
 *persistence* : H2 In-memory database is configured to store data. Database operations are performed using JPA.   
