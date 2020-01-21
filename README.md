@@ -37,7 +37,7 @@ Info ednpoint : http://localhost:8080/actuator/info
 
 Swagger http://localhost:8080/swagger-ui.html#
 
-Users : Two below Test uses are configured
+**Users** : Two below Test uses are configured
 
 user Name : niraj.sonawane@gmail.com , password : test ,role - ADMIN
 
