@@ -51,6 +51,10 @@ Sample Curl to get Token
 ```
 $ curl -X POST http://localhost:8080/authenticate -H "Content-Type:application/json" -d '{"userName":"niraj.sonawane@gmail.com","password":"test"}'
   ```
+To get Person  
+```
+curl -X GET http://localhost:8080/person -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJBUEkgQVBQIiwic3ViIjoibmlyYWouc29uYXdhbmVAZ21haWwuY29tIiwiaWF0IjoxNTc5ODEzODk5LCJleHAiOjE1Nzk4NjM4OTksIlJvbGVzIjpbIlJPTEVfQURNSU4iXX0.z02f5X9rBJA5uIUcLCc2rRi11_F2wc75nKRSqS1bqaWI5g2TXoMmeqZp3C56NdUPv6TsuipfbB2R7rC6_OzSOg"
+```
   
 ### person-management-api-reactive ###  
 
