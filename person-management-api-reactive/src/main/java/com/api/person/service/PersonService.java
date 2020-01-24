@@ -56,11 +56,15 @@ public class PersonService {
     }
 
     public Mono<ResponseEntity<GetPersonResponse>> update(String personId, Person person) {
-        log.info("Updating Person for id {}", person.getPersonId());
+        log.info("Updating Person for id {}", personId);
         return personRepository
                 .findById(personId)
                 .flatMap(person1 -> {
                     person1.setLastName(person.getLastName());
+                    person1.setFirstName(person.getFirstName());
+                    person1.setAge(person.getAge());
+                    person1.setFavouriteColour(person.getFavouriteColour());
+                    //person1.setFirstName(person.getFirstName());
                     return personRepository.save(person1);
                 })
                 .map(updatedPerson -> new ResponseEntity<>(personMapper.fromPerson(person), HttpStatus.NO_CONTENT))

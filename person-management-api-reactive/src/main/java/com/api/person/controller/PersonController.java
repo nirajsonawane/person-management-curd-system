@@ -18,6 +18,8 @@ import reactor.core.publisher.Mono;
 @RequestMapping("/person")
 @Slf4j
 @RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class PersonController {
 
     private final PersonService personService;
@@ -46,7 +48,7 @@ public class PersonController {
     }
     @PutMapping(value = "/{id}")
     public Mono<ResponseEntity<GetPersonResponse>> updatePerson(@Validated @RequestBody CreatePersonRequest person,@PathVariable String id) {
-        log.info("Creating Person Resource {}", person);
+        log.info("Updating Person Resource {} and Id {}", person,id);
         return personService.update(id,personMapper.toPerson(person));
 
     }

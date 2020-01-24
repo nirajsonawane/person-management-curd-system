@@ -33,7 +33,7 @@ public class AuthResource {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticateRequest.getUserName(), authenticateRequest.getPassword()));
         String token =jwtTokenProvider.generateToken((UserPrincipal)authentication.getPrincipal());
         log.info("Token Created {}",token);
-        return ResponseEntity.ok(JwtAuthenticationResponse.builder().accessToken(token).build());
+        return ResponseEntity.ok(JwtAuthenticationResponse.builder().tokenType("Bearer ").accessToken(token).build());
     }
 
 

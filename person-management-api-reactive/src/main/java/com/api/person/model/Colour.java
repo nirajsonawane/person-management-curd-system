@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public enum Colour {
 
-    RED("red"),GREEN("green"),BLUE("blue"),BLACK("back"),WHITE("white");
+    RED("red"),GREEN("green"),BLUE("blue"),BLACK("black"),WHITE("white");
 
     @JsonValue
     private final String colourValue;
