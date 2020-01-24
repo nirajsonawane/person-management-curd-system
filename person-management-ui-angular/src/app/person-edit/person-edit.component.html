@@ -1,0 +1,35 @@
+<section fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card fxFlex="500px" fxFlex.xs="100%">
+      <mat-card-title>Create a new Person</mat-card-title>
+      <form [formGroup]="personForm" autocomplete="off" novalidate (ngSubmit)="createPerson(personForm.value)" fxLayout="column wrap"
+        fxLayoutAlign="center center" fxLayoutGap="10px">
+        
+        <input type="hidden" formControlName="id"  [(ngModel)]="personFromDB.id">
+        <mat-card-content>
+  
+          <mat-form-field>
+            <input matInput type="text" placeholder="First name" formControlName="first_name" id="first_name" [(ngModel)]="personFromDB.first_name">                 
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Last name" formControlName="last_name" id="last_name" [(ngModel)]="personFromDB.last_name">                 
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Age" formControlName="age" id="age" [(ngModel)]="personFromDB.age">                 
+          </mat-form-field> 
+          <mat-form-field>
+            <input matInput type="text"  placeholder="favourite colour" formControlName="favourite_colour" id="favourite_colour" [(ngModel)]="personFromDB.favourite_colour">                 
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" readonly placeholder="Hobby " formControlName="hobby" id="hobby" [(ngModel)]="personFromDB.hobby">                 
+          </mat-form-field>                
+
+          
+        </mat-card-content>
+        <mat-card-actions align="center">
+            <button mat-fab color="primary" [disabled]="!personForm.valid">Update</button>            
+            <button mat-fab color="primary" [routerLink]="['/person']">Cancel</button>
+      
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </section>
