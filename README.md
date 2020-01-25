@@ -111,9 +111,9 @@ Application Will be started at http://localhost:4200/person
 
 
 ### TODO ###
-1 : Create Single build for all building All Three Projects 
+1 : Create Single build for all All Three Projects 
 
 2 : Dockerized the UI Application 
 
-3 : Create docker-compose file for complte aplication
+3 : Create docker-compose file for complete application
 
