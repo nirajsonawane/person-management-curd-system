@@ -9,16 +9,24 @@
         <mat-card-content>
   
           <mat-form-field>
-            <input matInput type="text" placeholder="First name" formControlName="first_name" id="first_name" [(ngModel)]="personFromDB.first_name">                 
+            <input matInput type="text" placeholder="First name" formControlName="first_name" id="first_name" [(ngModel)]="personFromDB.first_name">             
+            <mat-error *ngIf="hasError('first_name', 'required')">Name is required</mat-error>
+
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="text" placeholder="Last name" formControlName="last_name" id="last_name" [(ngModel)]="personFromDB.last_name">                 
+            <input matInput type="text" placeholder="Last name" required formControlName="last_name" id="last_name" [(ngModel)]="personFromDB.last_name">                 
+            <mat-error *ngIf="hasError('last_name', 'required')">Last Name is required</mat-error>
+
           </mat-form-field>
           <mat-form-field>
-            <input matInput type="text" placeholder="Age" formControlName="age" id="age" [(ngModel)]="personFromDB.age">                 
+            <input matInput type="text" placeholder="Age" required formControlName="age" id="age" [(ngModel)]="personFromDB.age">                 
+            <mat-error *ngIf="hasError('age', 'required')">Age is required</mat-error>
+
           </mat-form-field>          
           <mat-form-field>
-            <input matInput type="text"  placeholder="Hobby " formControlName="hobby" id="hobby" [(ngModel)]="personFromDB.hobby[0]">                 
+            <input matInput type="text"  placeholder="Hobby " required formControlName="hobby" id="hobby" [(ngModel)]="personFromDB.hobby[0]">                 
+            <mat-error *ngIf="hasError('hobby', 'required')">Hobby is required</mat-error>
+
           </mat-form-field>   
           <mat-form-field>
             <mat-label>Colour</mat-label>
@@ -28,6 +36,7 @@
               <option value="red">Red</option>
               <option value="blue">Blue</option>
             </select>
+            <mat-error *ngIf="hasError('favourite_colour', 'required')">Colour  is required</mat-error>
           </mat-form-field>             
 
           

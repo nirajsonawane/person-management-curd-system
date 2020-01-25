@@ -63,6 +63,10 @@ export class PersonEditComponent implements OnInit {
       });
     }
 
+    public hasError = (controlName:string, errorName:string) => {
+      return this.personForm.controls[controlName].hasError(errorName);
+      
+    }
     public createPerson = (personValue) => {
 
       if (this.personForm.valid) {

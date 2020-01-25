@@ -40,6 +40,11 @@ export class PersonAddComponent implements OnInit {
 
   }
 
+  public hasError = (controlName:string, errorName:string) => {
+    return this.personForm.controls[controlName].hasError(errorName);
+    
+  }
+
   public createPerson = (personValue) => {
     if (this.personForm.valid) {
       console.log(this.personForm)
