@@ -22,7 +22,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSnackBarModule} from '@angular/material/snack-bar'
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PersonAddComponent } from './person-add/person-add.component';
+import { AboutAppComponent } from './about-app/about-app.component'
 
 
 
@@ -30,7 +32,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar'
   declarations: [
     AppComponent,
     PersonComponent,
-    PersonEditComponent
+    PersonEditComponent,
+    PersonAddComponent,
+    AboutAppComponent
   ],
   imports: [
     BrowserModule,
