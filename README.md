@@ -1,16 +1,18 @@
 # Person Management Application #
 Repository has below projects 
 
-**1 : person-management-api** : Rest API 
+**1 : person-management-api** : Rest API For CURD 
 
 *[JAVA 8 + Spring Boot + JPA + H2 + Spring Security + JWT + mapstruct + junit 5]*
 
-**2 : person-management-api-reactive** : Non Blocking Reactive API 
+**2 : person-management-api-reactive** : Reactive Version Of Same API  
 
 *[JAVA 8 + Spring Boot + Spring Webflux + reactivemongo + Docker + Docker Compose + junit 5]*                                      
 
-**3 : UI** - WIP
+**3 : person-management-ui-angular** - User Interface for Performing CURD Operations
+*[Angular 7 + material design + reactive API as backend]*
 
+**4 : .github** Github build pipeline configurations  
 
  ### person-management-api ###  
  **[JAVA 8 + Spring Boot + JPA + H2 + Spring Security + JWT + mapstruct + junit 5]**  
@@ -76,7 +78,7 @@ curl -X GET http://localhost:8080/person -H "Authorization: Bearer eyJhbGciOiJIU
 
 **Build and run the app using maven** 
 
-maven is also configured to create docker image so no separate docker build command is needed for creating docker image.   
+maven is also configured to **create docker image** so no separate docker build command is needed for creating docker image.   
 
 Note- Ports are configured in docker-compose file. 
 
@@ -95,4 +97,23 @@ Health endpoint : http://localhost:8081/actuator/health
 Info ednpoint : http://localhost:8081/actuator/info
 
 Swagger http://localhost:8081/swagger-ui.html#
+
+
+### person-management-ui-angular ### 
+
+`cd person-management-ui-angular`
+
+`npm install`  ---To Install package
+
+`ng serve`    --- To Start Application
+
+Application Will be started at http://localhost:4200/person
+
+
+### TODO ###
+1 : Create Single build for all building All Three Projects 
+
+2 : Dockerized the UI Application 
+
+3 : Create docker-compose file for complte aplication
 
