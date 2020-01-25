@@ -64,6 +64,7 @@ export class PersonEditComponent implements OnInit {
     }
 
     public createPerson = (personValue) => {
+
       if (this.personForm.valid) {
         console.log(this.personForm)
        
@@ -72,12 +73,12 @@ export class PersonEditComponent implements OnInit {
           last_name: personValue.last_name,
           age: personValue.age,          
           id: personValue.id,
-          hobby: personValue.hobby,
+          hobby: JSON.parse('["'+personValue.hobby+'"]') ,
           favourite_colour: personValue.favourite_colour,
         }
         console.log(person)
         this.service.save(person).subscribe(result => {
-          this.commonService.openSnackBar("Patient Updated", "");
+          this.commonService.openSnackBar("Person Updated", "");
          this.commonService.gotoPerson();
         }, error => this.commonService.openSnackBar("Error While saving Data", ""));
   

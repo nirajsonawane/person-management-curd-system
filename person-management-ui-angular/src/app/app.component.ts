@@ -17,7 +17,12 @@ export class AppComponent {
             label: 'Person',
             link: './person',
             index: 0
-        }, 
+        },
+        {
+          label: 'About App',
+          link: './aboutApp',
+          index: 1
+      }, 
        
     ];
 }

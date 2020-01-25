@@ -1,7 +1,7 @@
 <h3>TODO : Support Multiple hobbys from UI</h3>
 <section fxLayout="row wrap" fxLayoutAlign="center center">
     <mat-card fxFlex="500px" fxFlex.xs="100%">
-      <mat-card-title>Update  Person</mat-card-title>
+      <mat-card-title>Create a new Person</mat-card-title>
       <form [formGroup]="personForm" autocomplete="off" novalidate (ngSubmit)="createPerson(personForm.value)" fxLayout="column wrap"
         fxLayoutAlign="center center" fxLayoutGap="10px">
         
@@ -18,7 +18,7 @@
             <input matInput type="text" placeholder="Age" formControlName="age" id="age" [(ngModel)]="personFromDB.age">                 
           </mat-form-field>          
           <mat-form-field>
-            <input matInput type="text"  placeholder="Hobby " formControlName="hobby" id="hobby" [(ngModel)]="personFromDB.hobby[0]">                 
+            <input matInput type="text"  placeholder="Hobby " formControlName="hobby" id="hobby" [(ngModel)]="personFromDB.hobby">                 
           </mat-form-field>   
           <mat-form-field>
             <mat-label>Colour</mat-label>
@@ -33,10 +33,11 @@
           
         </mat-card-content>
         <mat-card-actions align="center">
-            <button mat-fab color="primary" [disabled]="!personForm.valid">Save</button>            
+            <button mat-fab color="primary" [disabled]="!personForm.valid">save</button>            
             <button mat-fab color="primary" [routerLink]="['/person']">Cancel</button>
       
         </mat-card-actions>
       </form>
     </mat-card>
   </section>
+

@@ -26,7 +26,7 @@ public class PersonController {
     private final PersonMapper personMapper;
 
 
-    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @GetMapping()
     public Flux<GetPersonResponse> getAllPerson() {
         log.info("Getting All Person Data");
         return personService
