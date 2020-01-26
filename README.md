@@ -126,4 +126,4 @@ maven build will also create docker images for `person-management-api-reactive` 
 
 ### To Run complete application [UI + Reactive API + Mongo Database in docker]  ###
 
-run 'docker-compose up' in roor directory (person-management-curd-system) and access the application http://localhost:4200/
+run `docker-compose up` in roor directory (person-management-curd-system) and access the application http://localhost:4200/
