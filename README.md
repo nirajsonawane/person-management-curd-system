@@ -111,9 +111,19 @@ Application Will be started at http://localhost:4200/person
 
 
 ### TODO ###
-1 : Create Single build for all All Three Projects 
+1 : ~~Create Single build for all All Three Projects~~ Done
 
-2 : Dockerized the UI Application 
+2 : ~~Dockerized the UI Application~~ Done
 
-3 : Create docker-compose file for complete application
+3 : ~~Create docker-compose file for complete application~~ Done
 
+### To Build complete application  ###
+run `mvn package` in roor directory (person-management-curd-system)
+
+maven will build all modules (`person-management-api`,`person-management-api-reactive` and `person-management-ui-angular`)
+
+maven build will also create docker images for `person-management-api-reactive` and `person-management-ui-angular`
+
+### To Run complete application [UI + Reactive API + Mongo Database in docker]  ###
+
+run 'docker-compose up' in roor directory (person-management-curd-system) and access the application http://localhost:4200/
